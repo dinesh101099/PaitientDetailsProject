@@ -1,0 +1,68 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      Patient
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-header">
+              Create
+            </div>
+            <div class="card-body">
+              <form [formGroup]="Patientformgroup" (ngSubmit)="Onsubmit()">
+                <div class="row">
+                  <div class="col-sm-12 mb-3">
+                    <label>Name</label>
+                    <input type="text" formControlName="name" class="form-control" />
+                  </div>
+                  <div class="col-sm-12 mb-3">
+                    <label>Mobile No</label>
+                    <input type="text" formControlName="mobileNo" class="form-control" />
+                  </div>
+                  <div class="col-sm-12 mb-3">
+                    <label>Email Id</label>
+                    <input type="text" formControlName="emailID" class="form-control" />
+                  </div>
+                  <div class="col-sm-12 mb-3">
+                    <button class="btn btn-primary" type="submit">Create</button>
+                  </div>
+                  <div *ngIf="isFormSubmitted" class="alert alert-danger">
+                    Please fill in all the fields.
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div *ngIf="Patientarray.length == 0" class = "alert alert-info">
+            No Patients found
+          </div>
+          <table class="table" *ngIf="Patientarray.length > 0">
+            <thead>
+              <tr>
+                <td>Name</td>
+                <td>Mobile No</td>
+                <td>Email Id</td>
+                <td>Action</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pat of Patientarray">
+                <td>{{pat.name}}</td>
+                <td>{{pat.mobileNo}}</td>
+                <td>{{pat.emailID}}</td>
+                <td>
+                  <button (click)="Fillform(pat)" class="btn btn-link">Edit</button>
+                  <button (click)="DeletePatient(pat.id)" class="btn btn-link">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
